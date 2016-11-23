@@ -11,7 +11,7 @@ $(document).ready(function () {
     ]
 
     for(i = 0; i < myArray.length; i++){
-  	    $("#coursetable").append('<tr><th scope="row">'+(i+1)+'</th><td>'+myArray[i].name+'</td><td>'+myArray[i].credits+'</td><td>'+myArray[i].time+'</td></tr>');
+  	    $("#coursetable").append('<tr><td>'+myArray[i].name+'</td><td>'+myArray[i].credits+'</td><td>'+myArray[i].time+'</td></tr>');
   	}
     //original https://gist.github.com/danwoods/7496329, changed few things to fit our program
     function knapsack(capacity) {
@@ -63,19 +63,25 @@ $(document).ready(function () {
             }
         }
 
-  // Traverse through keepMatrix ([numItems][capacity] -> [1][?])
-  // to create solutionSet
-  idxWeight = capacity;
-  idxItem   = numItems;
-  for(idxItem; idxItem > 0; idxItem--){
-    if(keepMatrix[idxItem][idxWeight] === 1){
-      solutionSet.push(myArray[idxItem - 1]);
-      idxWeight = idxWeight - myArray[idxItem - 1].time;
+        // Traverse through keepMatrix ([numItems][capacity] -> [1][?])
+        // to create solutionSet
+        idxWeight = capacity;
+        idxItem   = numItems;
+        for(idxItem; idxItem > 0; idxItem--){
+            if(keepMatrix[idxItem][idxWeight] === 1){
+              solutionSet.push(myArray[idxItem - 1]);
+              idxWeight = idxWeight - myArray[idxItem - 1].time;
+            }
+        }
+        return {"maxValue": weightMatrix[numItems][capacity], "set": solutionSet};
     }
-  }
-  return {"maxValue": weightMatrix[numItems][capacity], "set": solutionSet};
-}
-var result = knapsack(200);
-			var set = result.set;
-			console.log(set);
+
+    $('#optimize').on('click', function(){
+        var result = knapsack(200);
+        var set = result.set;
+        console.log(set);
+        for(i = 0; i < set.length; i++){
+        $("#results").append('<tr><td></td><td>'+set[i].name+'</td><td>'+set[i].credits+'</td>');
+      }
+    });
 });
