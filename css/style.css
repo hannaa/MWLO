@@ -1,0 +1,12 @@
+html, body{
+  width: 100%
+}
+
+.content{
+  margin-left: auto;
+  width:  75%;
+}
+
+.row{
+  width: 75%;
+}

@@ -13,6 +13,14 @@ $(document).ready(function () {
     for(i = 0; i < myArray.length; i++){
   	    $("#coursetable").append('<tr><td>'+myArray[i].name+'</td><td>'+myArray[i].credits+'</td><td>'+myArray[i].time+'</td></tr>');
   	}
+
+    function addCourse(){
+      var newName = $("form").serializeArray();
+      $.each(newName, function(i, field){
+        $("#coursetable").append('<tr><td>'+field.name+'</td></tr>');
+
+      })
+    }
     //original https://gist.github.com/danwoods/7496329, changed few things to fit our program
     function knapsack(capacity) {
         var idxItem = 0,
@@ -75,6 +83,9 @@ $(document).ready(function () {
         }
         return {"maxValue": weightMatrix[numItems][capacity], "set": solutionSet};
     }
+    $('#add').on('click', function(){
+      addCourse();
+    });
 
     $('#optimize').on('click', function(){
         var result = knapsack(200);
