@@ -1,37 +1,45 @@
 
 $(document).ready(function () {
-    var myArray = [
-         { name: "Projekti", credits: 20, time: 200 },
-         { name: "Algoritmit", credits: 2, time: 40 },
-         { name: "Videot", credits: 5, time: 20 },
-         { name: "Keikka", credits: 1, time: 10 },
-         { name: "Ohjelmointi", credits: 9, time: 90 },
-         { name: "Lopputyö", credits: 17, time: 100 }
 
-    ]
+  var courseArray = [];
 
-    for(i = 0; i < myArray.length; i++){
-  	    $("#coursetable").append('<tr><td>'+myArray[i].name+'</td><td>'+myArray[i].credits+'</td><td>'+myArray[i].time+'</td></tr>');
+  function Course(name, credits, time){
+    this.name = name;
+    this.credits = credits;
+    this.time = time;
+  }
+
+  function setCourses(){
+    courseArray.push(new Course('Projekti', 20, 200));
+    courseArray.push(new Course('Algoritmit', 2, 40));
+    courseArray.push(new Course('Videot', 5, 20));
+    courseArray.push(new Course('Keikka', 1, 10));
+    courseArray.push(new Course('Ohjelmointi', 9, 90));
+    courseArray.push(new Course('Lopputyö', 17, 100));
+
+    for(i = 0; i < courseArray.length; i++){
+  	    $("#coursetable").append('<tr><td>'+courseArray[i].name+'</td><td>'+courseArray[i].credits+'</td><td>'+courseArray[i].time+'</td></tr>');
   	}
+  }
 
-    function addCourse(){
-      var newName = $("form").serializeArray();
-      $.each(newName, function(i, field){
-        $("#coursetable").append('<tr><td>'+field.name+'</td></tr>');
-
-      })
-    }
+  function addCourse(){
+    var n = $('#courseName').val();
+    var c = parseInt($('#courseCredits').val());
+    var h = parseInt($('#courseHours').val());
+      courseArray.push(new Course(n, h, c));
+      $("#coursetable").append('<tr><td>'+n+'</td><td>'+c.toString()+'</td><td>'+h.toString()+'</td><td><button class="btn btn-default delete">DELETE</button></td></tr>');
+      console.log(courseArray);
+  }
     //original https://gist.github.com/danwoods/7496329, changed few things to fit our program
     function knapsack(capacity) {
         var idxItem = 0,
         idxWeight = 0,
         oldMax = 0,
         newMax = 0,
-        numItems = myArray.length,
+        numItems = courseArray.length,
         weightMatrix = new Array(numItems+1),
         keepMatrix = new Array(numItems+1),
         solutionSet = [];
-        console.log(myArray);
         // Setup matrices
         for(idxItem = 0; idxItem < numItems + 1; idxItem++){
           weightMatrix[idxItem] = new Array(capacity+1);
@@ -49,8 +57,8 @@ $(document).ready(function () {
 
                 // If item will fit, decide if there's greater value in keeping it,
                 // or leaving it
-                else if (myArray[idxItem-1].time <= idxWeight){
-                    newMax = myArray[idxItem-1].credits + weightMatrix[idxItem-1][idxWeight-myArray[idxItem-1].time];
+                else if (courseArray[idxItem-1].time <= idxWeight){
+                    newMax = courseArray[idxItem-1].credits + weightMatrix[idxItem-1][idxWeight-courseArray[idxItem-1].time];
                     oldMax = weightMatrix[idxItem-1][idxWeight];
 
                 // Update the matrices
@@ -77,12 +85,15 @@ $(document).ready(function () {
         idxItem   = numItems;
         for(idxItem; idxItem > 0; idxItem--){
             if(keepMatrix[idxItem][idxWeight] === 1){
-              solutionSet.push(myArray[idxItem - 1]);
-              idxWeight = idxWeight - myArray[idxItem - 1].time;
+              solutionSet.push(courseArray[idxItem - 1]);
+              idxWeight = idxWeight - courseArray[idxItem - 1].time;
             }
         }
         return {"maxValue": weightMatrix[numItems][capacity], "set": solutionSet};
     }
+
+    setCourses();
+
     $('#add').on('click', function(){
       addCourse();
     });

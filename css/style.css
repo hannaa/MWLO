@@ -7,6 +7,14 @@ html, body{
   width:  75%;
 }
 
+.code{
+  text-align: center;
+}
+
 .row{
+  width: 95%;
+}
+
+.table{
   width: 75%;
 }
