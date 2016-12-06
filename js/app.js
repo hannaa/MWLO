@@ -103,7 +103,7 @@ $(document).ready(function () {
         var set = result.set;
         console.log(set);
         for(i = 0; i < set.length; i++){
-        $("#results").append('<tr><td></td><td>'+set[i].name+'</td><td>'+set[i].credits+'</td>');
+        $("#results").append('<tr><td>'+set[i].name+'</td><td>'+set[i].credits+'</td><td>'+set[i].time+'</td>');
       }
     });
 });
