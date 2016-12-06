@@ -1,20 +1,33 @@
 html, body{
+  margin: 0;
+  padding: 0;
   width: 100%
 }
 
+.addCourse{
+  margin-left: 12%;
+  margin-top: 45px;
+}
 .content{
-  margin-left: auto;
-  width:  75%;
+  margin: 0;
+  width:  100%;
 }
 
 .code{
   text-align: center;
 }
 
-.row{
-  width: 95%;
+.top-bar{
+  background-color: #008080;
+  color: lightcyan;
+  font-family: 'Comfortaa', cursive;
+  margin: 0;
+  padding-bottom: 10px;
+  width: 100%;
 }
 
 .table{
+  margin-left: 12%;
+  margin-top: 25px;
   width: 75%;
 }
