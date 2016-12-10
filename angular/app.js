@@ -73,16 +73,35 @@ app.controller('mainController', function($scope){
   }
 
   $scope.addNew = function(){
-    var newCourse = $scope.courses.length + 1;
-    $scope.courses.push({'name':'choice'+newItemNo});
+    $scope.courses.push({'name': $scope.name, 'credits': $scope.credits, 'hours': $scope.hours});
+    $scope.name = '';
+    $scope.credits = '';
+    $scope.hours = '';
   };
 
-  $('#optimize').on('click', function(){
-      var result = $scope.knapsack(200);
-      var set = result.set;
-      console.log(set);
-      for(i = 0; i < set.length; i++){
-      $("#results").append('<tr><td>'+set[i].name+'</td><td>'+set[i].credits+'</td><td>'+set[i].hours+'</td>');
+  $scope.delete = function(name){
+    var index = -1;
+		var courseArray = eval( $scope.courses );
+		for( var i = 0; i < courseArray.length; i++ ) {
+			if( courseArray[i].name === name ) {
+				index = i;
+				break;
+			}
+		}
+		if( index === -1 ) {
+			alert( "Something gone wrong" );
+		}
+		$scope.courses.splice( index, 1 );
+  };
+
+  $scope.optimize = function(){
+    $scope.time = $scope.hours;
+    console.log($scope.time);
+    if(isNaN($scope.time)){
+      $scope.time = 200;
     }
-  });
+    $scope.result = $scope.knapsack($scope.time);
+    $scope.set = $scope.result.set;
+    console.log($scope.set);
+  };
 });
