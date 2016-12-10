@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="workload">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+</head>
+<body ng-controller="mainController">
+    <div class="row top-bar">
+      <div class="col-md-8 col-md-offset-2">
+        <h1 class="code"><i class="fa fa-calculator"></i> Workload Optimator</h1>
+      </div>
+    </div>
+    <div class="row content">
+      <div class="container">
+        <div class="row add">
+          <div class="addCourse">
+            <fieldset  data-ng-repeat="choice in choices">
+              <input type="text" ng-model="choice.name" name="" placeholder="Enter mobile number">
+              <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
+            </fieldset>
+            <button class="btn btn-default" ng-click="addNewChoice()">Add fields</button>
+          </div>
+        </div>
+        <div class="row">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Points</th>
+                <th>Hours</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="course in courses">
+                <td>{{ course.name }} </td>
+                <td>{{ course.credits }} </td>
+                <td>{{ course.hours }} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <button id="optimize" class="btn btn-default">Calculate</button>
+        </div>
+        <div class="row">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Points</th>
+                <th>Hours</th>
+              </tr>
+            </thead>
+            <tbody id="results">
+            </tbody>
+        </div>
+      </div>
+    <!-- End of content div -->
+    </div>
+
+    <script src="../js/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
