@@ -95,13 +95,22 @@ app.controller('mainController', function($scope){
   };
 
   $scope.optimize = function(){
-    $scope.time = $scope.hours;
+    $scope.time = $scope.modHours;
     console.log($scope.time);
     if(isNaN($scope.time)){
       $scope.time = 200;
     }
     $scope.result = $scope.knapsack($scope.time);
     $scope.set = $scope.result.set;
-    console.log($scope.set);
+    $scope.totalCredits = 0;
+    $scope.totalHours = 0;
+    angular.forEach($scope.set, function(value){
+      console.log(value.credits);
+      $scope.totalCredits = $scope.totalCredits + value.credits;
+      $scope.totalHours = $scope.totalHours + value.hours;
+    });
+    return $scope.totalCredits;
+    return $scope.totalHours;
+    console.log($scope.totalCredits);
   };
 });

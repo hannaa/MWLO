@@ -53,14 +53,13 @@
         </div>
         <div class="row">
           <div class="form-group">
-          <input type="number" class="form-control" ng-model="hours" placeholder="Hours (default 200)" min="0" step="1">
+          <input type="number" class="form-control" ng-model="modHours" placeholder="Hours (default 200)" min="0" step="1">
           <button type="button" class="btn btn-default" ng-click="optimize()">Calculate</button>
-
           </div>
         </div>
         <div class="row">
           <div class="optimized">
-            <table class="table table-bordered">
+            <table class="table table-bordered" ng-hide="!set.length">
               <thead>
                 <tr>
                   <th>Name</th>
@@ -73,6 +72,11 @@
                   <td>{{ result.name }} </td>
                   <td>{{ result.credits }} </td>
                   <td>{{ result.hours }} </td>
+                </tr>
+                <tr>
+                  <td style="font-weight:bold">Total Credits & Time</td>
+                  <td style="font-weight:bold">{{totalCredits}}</td>
+                  <td style="font-weight:bold">{{totalHours}}</td>
                 </tr>
               </tbody>
             </table>
