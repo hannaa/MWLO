@@ -4,6 +4,12 @@ html, body{
   width: 100%
 }
 
+a{
+  color: lightseagreen;
+  font-family: 'Comfortaa', cursive;
+  font-size: large;
+}
+
 .addCourse{
   margin-bottom: 20px;
   margin-left: 12%;
@@ -13,6 +19,11 @@ html, body{
 .btn-danger{
   float: right;
 }
+
+.btn-default{
+  border-color: lightseagreen;
+}
+
 .content{
   margin: 0;
   width:  100%;
@@ -20,6 +31,20 @@ html, body{
 
 .code{
   text-align: center;
+}
+
+.form-control{
+  border: 1px solid lightseagreen;
+}
+
+#hourform{
+  float: right;	
+  width: 30%;
+}
+
+.link{
+  margin-left: 10%;
+  margin-top: 30px;
 }
 
 #optimize{
